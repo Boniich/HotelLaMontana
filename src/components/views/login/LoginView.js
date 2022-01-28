@@ -1,31 +1,34 @@
 import {useRef,useState,useEffect} from 'react';
 import axios from "axios";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
+const MySwal = withReactContent(Swal);
 
 export default function LoginView(){
 
     //useRef nos permite acceder al dom directamente para manipular los elementos
     //este useRef siempre genera un objecto mutable con una unica propiedad "current"
     const emailRef = useRef();
-    const errRef = useRef();
-    
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [errMsg, setErrMsg] = useState("");
     const [success, setSuccess] = useState(false);
 
     useEffect(() =>{
         emailRef.current.focus();
     },[])
 
-    useEffect(() =>{
-        setErrMsg("");
-    },[email,password])
+    // useEffect(() =>{},[email,password])
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
-
+        MySwal.fire({
+            title: "Procesando informacion",
+            text: "Espere por favor",   
+            allowOutsideClick: false,
+            showConfirmButton: false,
+        });
         try {
             const response = await axios.post("http://challenge-react.alkemy.org/",
             JSON.stringify({email,password}),
@@ -33,11 +36,29 @@ export default function LoginView(){
                 headers: { 'Content-Type': 'application/json' }
             }
             );
-            console.log(JSON.stringify(response.data));
+            const token = JSON.stringify(response.data);
+            console.log(token);
+            localStorage.setItem("token",token)
             setEmail("");
             setPassword("");
         } catch (error) {
-            console.log("datos incorrectos");
+            if(!error.response){
+                MySwal.fire({
+                    icon: 'error',
+                    title: 'oops...',
+                    text: 'No fue posible conectar con el servidor, por favor intentelo tarde',
+                  })
+
+            }else if(error?.response.status === 401){
+
+                MySwal.fire({
+                    icon: 'warning',
+                    title: 'Email y/o password no son correctos',
+                    text: 'Por favor, verifique sus datos!',
+                  })
+
+            }
+
         }
 
 
