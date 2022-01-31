@@ -1,37 +1,71 @@
-import {useRef,useState,useEffect} from 'react';
+import React, {useRef,useState,useEffect} from 'react';
 import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const MySwal = withReactContent(Swal);
 
 export default function LoginView(){
 
-    //useRef nos permite acceder al dom directamente para manipular los elementos
-    //este useRef siempre genera un objecto mutable con una unica propiedad "current"
-    const emailRef = useRef();
+    const [email, setEmail] = useState({email:"",valido:false});
+    const [password, setPassword] = useState({password: "",valido: false});
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [success, setSuccess] = useState(false);
+    //tests
 
-    useEffect(() =>{
-        emailRef.current.focus();
-    },[])
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    // useEffect(() =>{},[email,password])
+    const expressiones = {
+        email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+        password:  /^.{4,12}$/
+    }
+
+    const validateEmail = () =>{
+
+        if(expressiones.email.test(email.email)){
+            console.log("email correcto");
+            setEmail({...email,valido: true});
+
+
+        }else{
+            console.log("email incorrecto");
+            setEmail({...email,valido: false});
+        }
+
+    }
+
+    const validatePassword = () =>{
+
+        if(expressiones.password.test(password.password)){
+            console.log("password correcto");
+            setPassword({...password,valido: true});
+
+
+        }else{
+            console.log("password incorrecto");
+            setPassword({...password,valido: false});
+        }
+    }
+
+
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
-        MySwal.fire({
-            title: "Procesando informacion",
-            text: "Espere por favor",   
-            allowOutsideClick: false,
-            showConfirmButton: false,
-        });
+        // MySwal.fire({
+        //     title: "Procesando informacion",
+        //     text: "Espere por favor",   
+        //     allowOutsideClick: false,
+        //     showConfirmButton: false,
+        // });
+
         try {
+
             const response = await axios.post("http://challenge-react.alkemy.org/",
-            JSON.stringify({email,password}),
+            JSON.stringify({
+                email:email.email,
+                password: password.password
+            }),
             {   
                 headers: { 'Content-Type': 'application/json' }
             }
@@ -39,10 +73,18 @@ export default function LoginView(){
             const token = JSON.stringify(response.data);
             console.log(token);
             localStorage.setItem("token",token)
-            setEmail("");
-            setPassword("");
+            setEmail({...email,email: ""});
+            setPassword({...password,password: ""});
+            navigate("home")
         } catch (error) {
-            if(!error.response){
+
+            if(email.valido === false & password.valido === false){
+                MySwal.fire({
+                    icon: 'warning',
+                    title: 'Campos de Email y password estan vacios',
+                    text: 'Por favor, complete los campos!',
+                })
+            }else if(!error.response){
                 MySwal.fire({
                     icon: 'error',
                     title: 'oops...',
@@ -55,7 +97,7 @@ export default function LoginView(){
                     icon: 'warning',
                     title: 'Email y/o password no son correctos',
                     text: 'Por favor, verifique sus datos!',
-                  })
+                })
 
             }
 
@@ -66,32 +108,30 @@ export default function LoginView(){
 
     
     return (    
-    <div className="box-style" noValidate>
-    <form onSubmit={handleSubmit}>
+    <div className="box-style">
+    <form onSubmit={handleSubmit} noValidate>
         <div className="mb-3">
             <label htmlFor="email" className="form-label">Email address</label>
             <input 
                 type="email" 
                 className="form-control" 
-                id="exampleInputEmail1" 
+                id="email" 
                 aria-describedby="emailHelp"
-                ref={emailRef}
                 autoComplete='off'
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                required
+                onBlur={validateEmail}
+                onChange={(e) => setEmail({...email,email: e.target.value})}
+                value={email.email}
             />
-            <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
         </div>
         <div className="mb-3">
-            <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+            <label htmlFor="password" className="form-label">Password</label>
             <input 
                 type="password" 
                 className="form-control" 
-                id="exampleInputPassword1"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                required
+                id="password"
+                onBlur={validatePassword}
+                onChange={(e) => setPassword({...password, password:e.target.value})}
+                value={password.password}
             />
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
