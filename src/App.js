@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from './components/views/home/Home';
 import Others from './components/views/others/Others';
 import ProtectedHome from './router/ProtectedHome';
-import Layout from './components/views/Layout/Layout';
+import Layout from './components/views/layout/Layout';
 
 function App() {
   return (
