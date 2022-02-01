@@ -1,4 +1,4 @@
-import React, {useRef,useState,useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -8,13 +8,12 @@ const MySwal = withReactContent(Swal);
 
 export default function LoginView(){
 
-    const [email, setEmail] = useState({email:"",valido:false});
-    const [password, setPassword] = useState({password: "",valido: false});
-
-    //tests
+    const [email, setEmail] = useState({email:"",valido:null});
+    const [password, setPassword] = useState({password: "",valido: null});
 
     const navigate = useNavigate();
     const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const expressiones = {
         email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
@@ -72,18 +71,20 @@ export default function LoginView(){
             );
             const token = JSON.stringify(response.data);
             console.log(token);
-            localStorage.setItem("token",token)
+            localStorage.setItem("token",token);
+
             setEmail({...email,email: ""});
             setPassword({...password,password: ""});
-            navigate("home")
+            navigate(from,{replace: true});
         } catch (error) {
 
-            if(email.valido === false & password.valido === false){
+            if(email.valido === null & password.valido === null){
                 MySwal.fire({
                     icon: 'warning',
                     title: 'Campos de Email y password estan vacios',
                     text: 'Por favor, complete los campos!',
                 })
+
             }else if(!error.response){
                 MySwal.fire({
                     icon: 'error',
@@ -92,7 +93,6 @@ export default function LoginView(){
                   })
 
             }else if(error?.response.status === 401){
-
                 MySwal.fire({
                     icon: 'warning',
                     title: 'Email y/o password no son correctos',
@@ -122,6 +122,8 @@ export default function LoginView(){
                 onChange={(e) => setEmail({...email,email: e.target.value})}
                 value={email.email}
             />
+            {email.valido === false && 
+            <div className='boxErrors'><p className="error">El email no es correcto</p></div>}
         </div>
         <div className="mb-3">
             <label htmlFor="password" className="form-label">Password</label>
@@ -133,6 +135,8 @@ export default function LoginView(){
                 onChange={(e) => setPassword({...password, password:e.target.value})}
                 value={password.password}
             />
+            {password.valido === false && 
+            <div className='boxErrors'><p className="error">La password no es correcta</p></div>}
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
     </form>
