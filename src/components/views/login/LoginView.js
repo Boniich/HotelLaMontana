@@ -3,6 +3,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useLocation, useNavigate } from 'react-router-dom';
+import { HotelTitle } from './hotelTitle/HotelTitle';
+import { emptyFields, loadingMsg, notResponse, wrongData } from './MsgObj';
 
 const MySwal = withReactContent(Swal);
 
@@ -46,18 +48,11 @@ export default function LoginView(){
             setPassword({...password,valido: false});
         }
     }
-
-
+    
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
-        // MySwal.fire({
-        //     title: "Procesando informacion",
-        //     text: "Espere por favor",   
-        //     allowOutsideClick: false,
-        //     showConfirmButton: false,
-        // });
-
+        MySwal.fire(loadingMsg);
         try {
 
             const response = await axios.post("http://challenge-react.alkemy.org/",
@@ -72,42 +67,29 @@ export default function LoginView(){
             const token = JSON.stringify(response.data);
             console.log(token);
             localStorage.setItem("token",token);
-
+            MySwal.close();
             setEmail({...email,email: ""});
             setPassword({...password,password: ""});
             navigate(from,{replace: true});
         } catch (error) {
 
             if(email.valido === null & password.valido === null){
-                MySwal.fire({
-                    icon: 'warning',
-                    title: 'Campos de Email y password estan vacios',
-                    text: 'Por favor, complete los campos!',
-                })
-
+                MySwal.fire(emptyFields);
             }else if(!error.response){
-                MySwal.fire({
-                    icon: 'error',
-                    title: 'oops...',
-                    text: 'No fue posible conectar con el servidor, por favor intentelo tarde',
-                  })
-
+                MySwal.fire(notResponse)
             }else if(error?.response.status === 401){
-                MySwal.fire({
-                    icon: 'warning',
-                    title: 'Email y/o password no son correctos',
-                    text: 'Por favor, verifique sus datos!',
-                })
-
+                MySwal.fire(wrongData)
             }
 
         }
 
 
-    }
+    }    
+    return (   
 
-    
-    return (    
+    <section>
+    <HotelTitle />
+
     <div className="box-style">
     <form onSubmit={handleSubmit} noValidate>
         <div className="mb-3">
@@ -138,8 +120,10 @@ export default function LoginView(){
             {password.valido === false && 
             <div className='boxErrors'><p className="error">La password no es correcta</p></div>}
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit" className="btn btn-primary">Enviar</button>
     </form>
     </div>
+    </section>
+
 )
 }
