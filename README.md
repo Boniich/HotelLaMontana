@@ -48,9 +48,9 @@ You can see all this in the `version` file.
 
 ## How to run this project?
 
-### 1- See the project deployed
+Note: The web is not working in production for some problem with react route, meanwhile i fix it clone the repo is the only alternative. 
 
-### 2- Clone
+### 1- Clone
 
 You can clone the repo in you computer and run it with the command `npm start`
 
