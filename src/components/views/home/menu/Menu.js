@@ -1,74 +1,78 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import MenuView from "./MenuView";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { deleteMsg } from "./MsgObj";
+
+const MySwal = withReactContent(Swal);
+
+const initialState = [
+    {
+        id: 1,
+        title: "plato 1"
+    },{
+        id: 2,
+        title: "plato 2"
+    }, {
+        id: 3,
+        title: "plato 3"
+    },{
+        id: 4,
+        title: "plato 4"
+    },
+
+]
 
 export default function Menu(){
 
-    const [food, setFood] = useState([]);
-    const [info, setInfo] = useState([]);
+    const [food, setFood] = useState(initialState);
+    
+    // useEffect(() =>{
+    //     getFood();
+        
+    // },[])
 
-    useEffect(() =>{
+    // async function getFood(){
+    //     console.log("food");
+    //     let url = "https://api.spoonacular.com/recipes/complexSearch?number=4&apiKey=ffe601b2c0bf40e99eca791908d30c41";
 
-        getFood();
-        getFoodInfo();
-     
-    },[])
+    //     try{
+    //         const res = await axios.get(url);
+    //         console.log(res.data.results);
+    //         setFood(res.data.results);
 
-    async function getFood(){
-        console.log("food");
-        let url = "https://api.spoonacular.com/recipes/complexSearch?number=4&apiKey=ffe601b2c0bf40e99eca791908d30c41";
+    //     }catch(err){
+    //         console.log(err);
+    //     }
+    // }
 
-        try{
-            const res = await axios.get(url);
-            console.log(res.data.results);
-            setFood(res.data.results);
+    const deleteFromMenu = (id) =>{
 
+        MySwal.fire(deleteMsg).then((result) => {
+            if (result.isConfirmed) {
 
+            let data = food.filter(el => el.id !== id);
+            setFood(data);
 
-        }catch(err){
-            console.log(err);
-        }
-    }
-
-    console.log("food",food);
-
-    // console.log(food.id);
-
-    async function getFoodInfo(){
-        console.log("info");
-        console.log("food 2",food);
-        for(let e = 0; e<food.length;e++){
-            
-            let url = `https://api.spoonacular.com/recipes/${food[e].id}/information?includeNutrition=false&apiKey=ffe601b2c0bf40e99eca791908d30c41`;
-
-            try{
-                const res = await axios.get(url);
-                console.log(res);
-
-                let obj = {
-                    id: res.data.id,
-                    title: res.data.title,
-                    image: res.data.image,
-                    readyIn: res.data.readyInMinutes,
-                    price: res.data.pricePerServing,
-                    healtScore: res.data.healtScore
-                }
-
-                console.log("ID",obj);
-                setInfo((info) => [...info,obj]);
-            }catch(err){
-                console.log(err);
+              MySwal.fire(
+                'Eliminado!',
+                'El plato ha sido elimnado del menu.',
+                'success'
+              )
             }
-
-        }
+          })
     }
-
-    console.log("info",info);
 
     return(
         <>
-        {info.map((el)=>(
-            <MenuView key={el.id} title={el.title} image={el.image}/>
+        {food.map((el)=>(
+            <MenuView 
+                key={el.id} 
+                id={el.id}
+                title={el.title} 
+                image={el.image}
+                deleteFromMenu={deleteFromMenu}/>
         ))}
         </>
 
