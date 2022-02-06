@@ -48,7 +48,7 @@ You can see all this in the `version` file.
 
 ## How to run this project?
 
-Note: The web is not working in production for some problem with react route, meanwhile i fix it clone the repo is the only alternative. 
+Note: The web is not working in production for some problem with react route, meanwhile i fix it, clone the repo is the only alternative. 
 
 ### 1- Clone
 
