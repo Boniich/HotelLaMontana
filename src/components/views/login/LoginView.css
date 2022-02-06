@@ -20,16 +20,7 @@
   .boxErrors{
     margin: 5px 0;
   }
-  
-  .flex-box{
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin: 25px 0;
-  
-  }
-  
+    
   .delete-btn{
     background-color: #d33;
     color: #fff;
