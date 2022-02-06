@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/HotelLaMontana/static/css/main.c9061e09.css",
-    "main.js": "/HotelLaMontana/static/js/main.96027f17.js",
+    "main.js": "/HotelLaMontana/static/js/main.35f5fd64.js",
     "static/js/787.ca53e4f2.chunk.js": "/HotelLaMontana/static/js/787.ca53e4f2.chunk.js",
     "static/media/background3.jpg": "/HotelLaMontana/static/media/background3.a37922ad823c5cd6e65e.jpg",
     "index.html": "/HotelLaMontana/index.html",
     "main.c9061e09.css.map": "/HotelLaMontana/static/css/main.c9061e09.css.map",
-    "main.96027f17.js.map": "/HotelLaMontana/static/js/main.96027f17.js.map",
+    "main.35f5fd64.js.map": "/HotelLaMontana/static/js/main.35f5fd64.js.map",
     "787.ca53e4f2.chunk.js.map": "/HotelLaMontana/static/js/787.ca53e4f2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c9061e09.css",
-    "static/js/main.96027f17.js"
+    "static/js/main.35f5fd64.js"
   ]
 }
