@@ -1,0 +1,8 @@
+.flex-box{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 25px 0;
+  
+  }
