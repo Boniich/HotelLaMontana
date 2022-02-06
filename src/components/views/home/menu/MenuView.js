@@ -1,14 +1,14 @@
-export default function MenuView({title, image,readyIn}){
+export default function MenuView({id,title, image, deleteFromMenu}){
 
     return(
     
         <div className="card" style={{width: 18+'rem'}}>
          <img src={image} className="card-img-top" alt="..."/>
             <div className="card-body">
-                <h5 className="card-title">{title}</h5>
-                <p className="card-text">ReadyIn: {readyIn}</p>
-                <p className="card-text">Price:</p>
-                <a href="#" className="btn btn-primary">Go somewhere</a>
+                <h5 className="card-title">{title}</h5> 
+            </div>
+            <div className="card-body">
+                <button className="btn delete-btn" onClick={() => deleteFromMenu(id)}>Eliminar</button>
             </div>
         </div>
  
