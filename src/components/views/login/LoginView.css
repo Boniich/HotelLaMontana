@@ -1,0 +1,46 @@
+
+.box-style{
+    width: auto;
+    margin: 60px 0;
+    background-color: #fff;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0px 1px 4px #aebecd;
+    opacity: 95%;
+  }
+
+.error{
+    margin: 0;
+    color: red;
+    font-size: 14px;
+    padding-left: 5px;
+  }
+  
+  .boxErrors{
+    margin: 5px 0;
+  }
+  
+  .flex-box{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 25px 0;
+  
+  }
+  
+  .delete-btn{
+    background-color: #d33;
+    color: #fff;
+  }
+  
+  @media screen and (min-width: 600px) {
+  
+    .box-style{
+      width: 400px;
+      max-width: 1024px;
+      margin: 60px auto;
+    }
+
+}
