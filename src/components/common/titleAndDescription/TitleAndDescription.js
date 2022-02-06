@@ -1,3 +1,4 @@
+import "./TitleAndDescription.css"
 export const TitleAndDescription = ({title,description}) =>{
 
     return(
