@@ -7,45 +7,28 @@ import { deleteMsg } from "./MsgObj";
 
 const MySwal = withReactContent(Swal);
 
-const initialState = [
-    {
-        id: 1,
-        title: "plato 1"
-    },{
-        id: 2,
-        title: "plato 2"
-    }, {
-        id: 3,
-        title: "plato 3"
-    },{
-        id: 4,
-        title: "plato 4"
-    },
-
-]
-
 export default function Menu(){
 
-    const [food, setFood] = useState(initialState);
-    
-    // useEffect(() =>{
-    //     getFood();
+    const [food, setFood] = useState([]);
+
+    useEffect(() =>{
+        getFood();
         
-    // },[])
+    },[])
 
-    // async function getFood(){
-    //     console.log("food");
-    //     let url = "https://api.spoonacular.com/recipes/complexSearch?number=4&apiKey=ffe601b2c0bf40e99eca791908d30c41";
+    async function getFood(){
+        console.log("food");
+        let url = "https://api.spoonacular.com/recipes/complexSearch?number=4&apiKey=ffe601b2c0bf40e99eca791908d30c41";
 
-    //     try{
-    //         const res = await axios.get(url);
-    //         console.log(res.data.results);
-    //         setFood(res.data.results);
+        try{
+            const res = await axios.get(url);
+            console.log(res.data.results);
+            setFood(res.data.results);
 
-    //     }catch(err){
-    //         console.log(err);
-    //     }
-    // }
+        }catch(err){
+            console.log(err);
+        }
+    }
 
     const deleteFromMenu = (id) =>{
 
