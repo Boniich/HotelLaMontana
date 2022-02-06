@@ -1,10 +1,11 @@
+import "./LoginView.css"
 import React, {useState} from 'react';
 import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useLocation, useNavigate } from 'react-router-dom';
-import { HotelTitle } from './hotelTitle/HotelTitle';
 import { emptyFields, loadingMsg, notResponse, wrongData } from './MsgObj';
+import { TitleAndDescription } from '../../common/titleAndDescription/TitleAndDescription';
 
 const MySwal = withReactContent(Swal);
 
@@ -88,7 +89,10 @@ export default function LoginView(){
     return (   
 
     <section>
-    <HotelTitle />
+    <TitleAndDescription 
+        title="Hotel La Montaña" 
+        description="Disfruta de tus vaciones!" 
+    />
 
     <div className="box-style">
     <form onSubmit={handleSubmit} noValidate>
