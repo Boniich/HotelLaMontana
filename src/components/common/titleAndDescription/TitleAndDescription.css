@@ -17,3 +17,14 @@
   .title-description{
     margin-top: 20px;
   }
+
+
+  @media screen and (min-width: 600px) {
+
+    .title-description{
+      width: 400px;
+      max-width: 1024px;
+      margin: 60px auto;
+    }
+  }
+  
