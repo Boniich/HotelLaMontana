@@ -4,9 +4,9 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useLocation, useNavigate } from 'react-router-dom';
-import { emptyFields, notResponse, wrongData } from './MsgObj';
+import { emptyFields, wrongData } from './MsgObj';
 import { TitleAndDescription } from '../../common/titleAndDescription/TitleAndDescription';
-import { loadingMsg } from "../../../consts/sweetAlertMsg";
+import { LOADING_MSG, NOT_RESPONSE_SERVER } from "../../../consts/sweetAlertMsg";
 
 const MySwal = withReactContent(Swal);
 
@@ -54,7 +54,7 @@ export default function LoginView(){
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
-        MySwal.fire(loadingMsg);
+        MySwal.fire(LOADING_MSG);
         try {
 
             const response = await axios.post("http://challenge-react.alkemy.org/",
@@ -78,7 +78,7 @@ export default function LoginView(){
             if(email.valido === null & password.valido === null){
                 MySwal.fire(emptyFields);
             }else if(!error.response){
-                MySwal.fire(notResponse)
+                MySwal.fire(NOT_RESPONSE_SERVER)
             }else if(error?.response.status === 401){
                 MySwal.fire(wrongData)
             }
