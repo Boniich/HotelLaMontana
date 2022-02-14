@@ -1,11 +1,3 @@
-
-export let loadingMsg = {
-    title: "Procesando informacion",
-    text: "Espere por favor",   
-    allowOutsideClick: false,
-    showConfirmButton: false,
-}
-
 export let emptyFields = {
     icon: 'warning',
     title: 'Campos de Email y password estan vacios',
