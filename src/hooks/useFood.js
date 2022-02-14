@@ -24,7 +24,7 @@ export const useFood = () =>{
 
     async function getFood(){
         console.log("food");
-        let url = "https://api.spoonacular.com/recipes/complexSearch?number=4&aiKey=ffe601b2c0bf40e99eca791908d30c41";
+        let url = "https://api.spoonacular.com/recipes/complexSearch?number=4&apiKey=ffe601b2c0bf40e99eca791908d30c41";
 
         try{
             const res = await axios.get(url);
