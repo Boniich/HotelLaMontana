@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { deleteMsg } from "./MsgObj";
 import { useFood } from "../../../../hooks/useFood";
+import { loadingMsg } from "../../../../consts/sweetAlertMsg";
 
 const MySwal = withReactContent(Swal);
 
@@ -13,14 +14,13 @@ export default function Menu(){
     const [info, setInfo] = useState([]);
 
     const {food} = useFood();
-
+    
     useEffect(() =>{
         getFoodInfo();
     },[food])
 
     async function getFoodInfo(){
-        console.log("info");
-        console.log("food 2",food);
+        
         for(let e = 0; e<food.length;e++){
             console.log("entro");
             let url = `https://api.spoonacular.com/recipes/${food[e].id}/information?includeNutrition=false&apiKey=ffe601b2c0bf40e99eca791908d30c41`;
@@ -40,6 +40,7 @@ export default function Menu(){
 
                 console.log("ID",obj);
                 setInfo((info) => [...info,obj]);
+                MySwal.close();
             }catch(err){
                 console.log(err);
             }
