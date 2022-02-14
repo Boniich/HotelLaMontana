@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { loadingMsg } from "../consts/sweetAlertMsg";
+import { LOADING_MSG, NOT_RESPONSE_SERVER } from "../consts/sweetAlertMsg";
 
 const MySwal = withReactContent(Swal);
 
@@ -17,7 +17,7 @@ export const useFood = () =>{
     const [food, setFood] = useState([]);
     console.log("entro en food");
     useEffect(() =>{
-        MySwal.fire(loadingMsg);
+        MySwal.fire(LOADING_MSG);
         getFood();
     },[]);
 
@@ -31,7 +31,10 @@ export const useFood = () =>{
             setFood(res.data.results);
 
         }catch(err){
-            if(err?.response.status === 402){
+
+            if(err?.response.status === 401){
+                MySwal.fire(NOT_RESPONSE_SERVER);
+            }else if(err?.response.status === 402){
                 MySwal.fire(CONECTION_ERROR_FOOD_API);
             }
             
