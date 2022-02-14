@@ -35,7 +35,7 @@ export default function Menu(){
                     image: res.data.image,
                     readyIn: res.data.readyInMinutes,
                     price: res.data.pricePerServing,
-                    healtScore: res.data.healtScore
+                    healthScore: res.data.healthScore
                 }
 
                 console.log("ID",obj);
@@ -73,6 +73,9 @@ export default function Menu(){
                 id={el.id}
                 title={el.title} 
                 image={el.image}
+                price={el.price}
+                readyIn={el.readyIn}
+                healthScore={el.healthScore}
                 deleteFromMenu={deleteFromMenu}
                 />
         ))}
