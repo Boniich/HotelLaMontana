@@ -4,8 +4,9 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useLocation, useNavigate } from 'react-router-dom';
-import { emptyFields, loadingMsg, notResponse, wrongData } from './MsgObj';
+import { emptyFields, notResponse, wrongData } from './MsgObj';
 import { TitleAndDescription } from '../../common/titleAndDescription/TitleAndDescription';
+import { loadingMsg } from "../../../consts/sweetAlertMsg";
 
 const MySwal = withReactContent(Swal);
 
