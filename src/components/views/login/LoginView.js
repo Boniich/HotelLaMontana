@@ -4,9 +4,9 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useLocation, useNavigate } from 'react-router-dom';
-import { emptyFields, wrongData } from './MsgObj';
 import { TitleAndDescription } from '../../common/titleAndDescription/TitleAndDescription';
 import { LOADING_MSG, NOT_RESPONSE_SERVER } from "../../../consts/sweetAlertMsg";
+import { EMPTY_FIELDS, WRONG_DATA } from "./sweetAlertLoginObj";
 
 const MySwal = withReactContent(Swal);
 
@@ -76,11 +76,11 @@ export default function LoginView(){
         } catch (error) {
 
             if(email.valido === null & password.valido === null){
-                MySwal.fire(emptyFields);
+                MySwal.fire(EMPTY_FIELDS);
             }else if(!error.response){
                 MySwal.fire(NOT_RESPONSE_SERVER)
             }else if(error?.response.status === 401){
-                MySwal.fire(wrongData)
+                MySwal.fire(WRONG_DATA)
             }
 
         }
