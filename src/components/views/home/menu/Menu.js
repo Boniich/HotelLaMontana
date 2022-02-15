@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import MenuView from "./MenuView";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { deleteMsg } from "./MsgObj";
 import { useFood } from "../../../../hooks/useFood";
+import { DELETE_MSG } from "./sweetAlertMenuObj";
 
 const MySwal = withReactContent(Swal);
 
@@ -50,7 +50,7 @@ export default function Menu(){
 
     const deleteFromMenu = (id) =>{
 
-        MySwal.fire(deleteMsg).then((result) => {
+        MySwal.fire(DELETE_MSG).then((result) => {
             if (result.isConfirmed) {
 
             let data = info.filter(el => el.id !== id);
