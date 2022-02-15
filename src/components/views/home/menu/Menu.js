@@ -22,7 +22,7 @@ export default function Menu(){
         
         for(let e = 0; e<food.length;e++){
             console.log("entro");
-            let url = `https://api.spoonacular.com/recipes/${food[e].id}/information?includeNutrition=false&apiKey=ffe601b2c0bf40e99eca791908d30c41`;
+            let url = `${process.env.REACT_APP_RECIPE_API}${food[e].id}/information?includeNutrition=false&${process.env.REACT_APP_API_KEY}`;
 
             try{
                 const res = await axios.get(url);

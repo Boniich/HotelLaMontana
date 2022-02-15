@@ -57,7 +57,7 @@ export default function LoginView(){
         MySwal.fire(LOADING_MSG);
         try {
 
-            const response = await axios.post("http://challenge-react.alkemy.org/",
+            const response = await axios.post(process.env.REACT_APP_LOGIN_URL,
             JSON.stringify({
                 email:email.email,
                 password: password.password

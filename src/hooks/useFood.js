@@ -24,7 +24,8 @@ export const useFood = () =>{
 
     async function getFood(){
         console.log("food");
-        let url = "https://api.spoonacular.com/recipes/complexSearch?number=4&apiKey=ffe601b2c0bf40e99eca791908d30c41";
+        
+        let url = `${process.env.REACT_APP_RECIPE_API}complexSearch?number=4&${process.env.REACT_APP_API_KEY}`;
 
         try{
             const res = await axios.get(url);
