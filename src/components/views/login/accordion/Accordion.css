@@ -1,0 +1,11 @@
+.accord {
+  margin-top: 20px;
+}
+
+@media screen and (min-width: 600px) {
+  .accord {
+    width: 400px;
+    max-width: 1024px;
+    margin: 0 auto;
+  }
+}
