@@ -1,30 +1,28 @@
-.title-description{
-    background-color: #fff;
-    border-radius: 12px;
-    border: 2px solid #2169bb9f;
-  }
-  
-  .title-description > h1{
-    padding-top: 12px;
-  }
-  
-  .title-description > h1, .title-description > p{
-    text-align: center;
-    margin: 0;
-    padding-bottom: 12px;
-  }
+.title-description {
+  background-color: #fff;
+  border-radius: 12px;
+  border: 2px solid #2169bb9f;
+}
 
-  .title-description{
-    margin-top: 20px;
+.title-description > h1 {
+  padding-top: 12px;
+}
+
+.title-description > h1,
+.title-description > p {
+  text-align: center;
+  margin: 0;
+  padding-bottom: 12px;
+}
+
+.title-description {
+  margin-top: 20px;
+}
+
+@media screen and (min-width: 600px) {
+  .title-description {
+    width: 400px;
+    max-width: 1024px;
+    margin: 60px auto;
   }
-
-
-  @media screen and (min-width: 600px) {
-
-    .title-description{
-      width: 400px;
-      max-width: 1024px;
-      margin: 60px auto;
-    }
-  }
-  
+}
