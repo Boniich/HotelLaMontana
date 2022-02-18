@@ -1,3 +1,4 @@
+import "./PageNotFound.css";
 import { Link } from "react-router-dom";
 
 const PageNotFound = () => {
@@ -5,12 +6,12 @@ const PageNotFound = () => {
     <div className="page-not-found">
       <div className="alert alert-warning" role="alert">
         <h1 className="alert-title">Pagina no encontrada</h1>
-        <p className="alert-title">
+        <p className="alert-descripcion">
           Haz click en el enlace de abajo para volver al Home.
           <br />
           Recuerda que si no estas autentificado, seras regresado al login.
         </p>
-        <div className="alert-title">
+        <div className="button-box">
           <Link to="/">
             <button className="btn btn-primary">Home</button>
           </Link>
