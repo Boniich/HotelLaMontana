@@ -1,0 +1,16 @@
+.page-not-found {
+  margin: 200px 0;
+}
+
+.alert-title,
+.alert-descripcion {
+  text-align: center;
+  color: black;
+  margin: 0;
+  padding: 16px;
+}
+
+.button-box {
+  display: flex;
+  justify-content: center;
+}
