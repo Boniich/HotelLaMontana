@@ -1,3 +1,5 @@
+import "./Menu.css";
+
 export default function MenuView({
   id,
   title,
