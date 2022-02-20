@@ -1,11 +1,10 @@
-*{
+* {
   box-sizing: border-box;
 }
 
-body{
+body {
   background: url(../src/assests/background/background3.jpg);
   background-repeat: no-repeat;
   background-position: top;
   background-attachment: fixed;
-  
 }
