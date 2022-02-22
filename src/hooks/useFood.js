@@ -29,7 +29,7 @@ export const useFood = () => {
       const res = await axios.get(url);
       setFood(res.data.results);
     } catch (err) {
-      if (err?.response.status === 401) {
+      if (err?.response.status === 401 || err?.response.status === 404) {
         MySwal.fire(NOT_RESPONSE_SERVER);
       } else if (err?.response.status === 402) {
         MySwal.fire(CONECTION_ERROR_FOOD_API);
