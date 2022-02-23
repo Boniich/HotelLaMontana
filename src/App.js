@@ -5,13 +5,16 @@ import Home from "./components/views/home/Home";
 import ProtectedHome from "./router/protectedHome/ProtectedHome";
 import Layout from "./components/views/layout/Layout";
 import PageNotFound from "./router/pageNotFound/PageNotFound";
+import IsLogged from "./router/isLogged/IsLogged";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         {/* Publick */}
-        <Route path="login" element={<LoginView />} />
+        <Route element={<IsLogged />}>
+          <Route path="login" element={<LoginView />} />
+        </Route>
 
         {/* Protected */}
         <Route element={<ProtectedHome />}>
