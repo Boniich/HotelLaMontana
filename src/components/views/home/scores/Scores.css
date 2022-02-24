@@ -1,0 +1,19 @@
+.scores-box {
+  background-color: #fff;
+  margin-top: 20px;
+  border-radius: 8px;
+  padding: 5px 8px;
+  box-shadow: 0 2px 3px rgb(28, 36, 37);
+}
+
+.scores-box > h1 {
+  text-align: center;
+}
+
+@media screen and (min-width: 400px) {
+  .scores-box {
+    width: auto;
+    max-width: 1024px;
+    margin: 20px auto 0 auto;
+  }
+}
