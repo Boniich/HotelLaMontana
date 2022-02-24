@@ -82,7 +82,7 @@ export default function LoginView() {
     <section>
       <TitleAndDescription
         title="Hotel La Montaña"
-        description="Disfruta de tus vaciones!"
+        description="Disfruta de tus vacaciones!"
       />
       <Accordion />
       <div className="box-style">
