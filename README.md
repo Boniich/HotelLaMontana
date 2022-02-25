@@ -1,9 +1,8 @@
 # Hotel La Montaña
 
-This app allows see and delete 4 dish.
+This app allows see and delete 4 dish. Also will be able to see the indididual price, readyIn and healthScore of this dish, like the global value of all menu.
 
-This app was build for the challange of Alkermy, unfortunelly this app not finished yet, so you can conciderete as the first version (1.0.0) of this app.
-
+This App was built for Alkemy acceleration
 
 ## Tecnologies/lenguages
 
@@ -14,6 +13,7 @@ This app was build for the challange of Alkermy, unfortunelly this app not finis
 - Axios
 - React Routes dom
 - Sweet Alert
+- Env
 
 ## Folder Struct
 
@@ -28,6 +28,8 @@ my-hotel
 |        |    |__ views
 |        |
 |        |__ router
+|        |__ hooks
+|        |__ consts
 |
 |__ README
 |__ version
@@ -38,9 +40,11 @@ my-hotel
 **- assests**: Contains things like logos,images, etc.  
 **- versionBanner**: Contains all files realted to my custom version file.  
 **- component**: Contains all component of project.  
-**- common**: Contains all re usable components.    
+**- common**: Contains all re usable components.  
 **- views**: Contains main components with his logic and other files about it.  
 **- routes**: Contains private routes  
+**- hooks**: Contains all custom hooks  
+**- consts**: Contains all consts of project
 
 ## Features/Current Problems/Problem Fixed
 
@@ -48,9 +52,8 @@ You can see all this in the `version` file.
 
 ## How to run this project?
 
-Note: The web is not working in production for some problem with react route, meanwhile i fix it, clone the repo is the only alternative. 
+Note: The web is not working in production for some problem with react route, meanwhile i fix it, clone the repo is the only alternative.
 
 ### 1- Clone
 
 You can clone the repo in you computer and run it with the command `npm start`
-
