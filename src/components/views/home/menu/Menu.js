@@ -1,54 +1,32 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import MenuView from "./MenuView";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { useFood } from "../../../../hooks/useFood";
 import { DELETE_MSG } from "./sweetAlertMenuObj";
 
 const MySwal = withReactContent(Swal);
 
-export default function Menu() {
-  const [info, setInfo] = useState([]);
-
-  const { food } = useFood();
-
-  useEffect(() => {
-    getFoodInfo();
-  }, [food]);
-
-  async function getFoodInfo() {
-    for (let e = 0; e < food.length; e++) {
-      console.log("entro");
-      let url = `${process.env.REACT_APP_RECIPE_API}${food[e].id}/information?includeNutrition=false&${process.env.REACT_APP_API_KEY}`;
-
-      try {
-        const res = await axios.get(url);
-        console.log(res);
-
-        let obj = {
-          id: res.data.id,
-          title: res.data.title,
-          image: res.data.image,
-          readyIn: res.data.readyInMinutes,
-          price: res.data.pricePerServing,
-          healthScore: res.data.healthScore,
-        };
-
-        console.log("ID", obj);
-        setInfo((info) => [...info, obj]);
-        MySwal.close();
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  }
-
+export default function Menu({
+  info,
+  price,
+  readyIn,
+  healthScore,
+  setInfo,
+  setPrice,
+  setReadyIn,
+  setHealthScore,
+}) {
   const deleteFromMenu = (id) => {
     MySwal.fire(DELETE_MSG).then((result) => {
       if (result.isConfirmed) {
+        let itemDeleted = info.filter((el) => el.id === id);
         let data = info.filter((el) => el.id !== id);
+
         setInfo(data);
+
+        //update scores
+        setPrice(price - itemDeleted[0].price);
+        setReadyIn(readyIn - itemDeleted[0].readyIn);
+        setHealthScore(healthScore - itemDeleted[0].healthScore);
 
         MySwal.fire(
           "Eliminado!",
