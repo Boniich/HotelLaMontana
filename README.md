@@ -52,8 +52,20 @@ You can see all this in the `version` file.
 
 ## How to run this project?
 
-Note: The web is not working in production for some problem with react route, meanwhile i fix it, clone the repo is the only alternative.
+### 1 See the file Demo.md in this repo
 
-### 1- Clone
+This file contains a bit of info, image and a video about app
 
-You can clone the repo in you computer and run it with the command `npm start`
+### 2- Clone
+
+Follow this step:
+
+1- Clone the repo
+2- Run the command `npm i`
+3- create a file called `.env.local` and add this enviroment varible
+
+REACT_APP_LOGIN_URL = http://challenge-react.alkemy.org/
+REACT_APP_API_KEY = apiKey=ffe601b2c0bf40e99eca791908d30c41
+REACT_APP_RECIPE_API = https://api.spoonacular.com/recipes/
+
+4- Run `npm start`
