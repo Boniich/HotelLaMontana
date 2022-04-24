@@ -1,18 +1,19 @@
 import "./LoginView.css";
 import React, { useState } from "react";
-import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TitleAndDescription } from "../../common/titleAndDescription/TitleAndDescription";
-import {
-  LOADING_MSG,
-  NOT_RESPONSE_SERVER,
-} from "../../../consts/sweetAlertMsg";
+import { LOADING_MSG } from "../../../consts/sweetAlertMsg";
 import { EMPTY_FIELDS, WRONG_DATA } from "./sweetAlertLoginObj";
 import Accordion from "./accordion/Accordion";
 
 const MySwal = withReactContent(Swal);
+
+const data = {
+  email: "challenge@alkemy.org",
+  password: "react",
+};
 
 export default function LoginView() {
   const [email, setEmail] = useState({ email: "", valido: null });
@@ -46,36 +47,23 @@ export default function LoginView() {
       setPassword({ ...password, valido: false });
     }
   };
-
+  // This login is FAKE just for deploy purpose, you can see the original login in the folder doc/login
   const handleSubmit = async (e) => {
     e.preventDefault();
     MySwal.fire(LOADING_MSG);
-    try {
-      const response = await axios.post(
-        process.env.REACT_APP_LOGIN_URL,
-        JSON.stringify({
-          email: email.email,
-          password: password.password,
-        }),
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      const token = JSON.stringify(response.data);
-      console.log(token);
-      localStorage.setItem("token", token);
+    if (email.email === data.email && password.password === data.password) {
+      localStorage.setItem("token", "token");
       MySwal.close();
       setEmail({ ...email, email: "" });
       setPassword({ ...password, password: "" });
       navigate(from, { replace: true });
-    } catch (error) {
-      if ((email.valido === null) & (password.valido === null)) {
-        MySwal.fire(EMPTY_FIELDS);
-      } else if (!error.response) {
-        MySwal.fire(NOT_RESPONSE_SERVER);
-      } else if (error?.response.status === 401) {
-        MySwal.fire(WRONG_DATA);
-      }
+    } else if (email.valido === null && password.valido === null) {
+      MySwal.fire(EMPTY_FIELDS);
+    } else if (
+      (email.email !== data.email && email.email !== null) ||
+      (password.password !== data.password && password.password !== null)
+    ) {
+      MySwal.fire(WRONG_DATA);
     }
   };
   return (
@@ -128,7 +116,7 @@ export default function LoginView() {
             )}
           </div>
           <button type="submit" className="btn btn-primary">
-            Enviar
+            Login In
           </button>
         </form>
       </div>
